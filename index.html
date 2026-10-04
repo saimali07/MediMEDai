@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Assessment & Triage — MediMind AI</title>
+  <meta name="description" content="MediMind AI — educational, non-diagnostic health assessment from text, photos, voice and lab reports.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme-init.js"></script>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main id="app-main">
+    <section id="view-landing">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-meta-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span data-i18n="hero_badge">Non-diagnostic Educational Triage</span>
+          </div>
+          <h1 class="hero-title" data-i18n="hero_title">Tell us what's going on.</h1>
+          <p class="hero-desc" data-i18n="hero_subtitle">Describe it, show it, say it, or upload your report. You get a calm, structured assessment with a clear urgency level.</p>
+          <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+            <a class="btn btn-primary" href="text.html" data-i18n="btn_start_assessment">
+              Start assessment
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <button class="btn btn-quiet" id="how-btn" data-i18n="btn_how_it_works">How it works ↓</button>
+          </div>
+        </div>
+
+        <!-- Live client-side safety demo (runs entirely in the browser) -->
+        <div class="demo-card">
+          <div class="demo-label-row">
+            <label for="demo-input" class="demo-label" data-i18n="demo_box_title">Live Client Safety Demo</label>
+            <span class="demo-subtext" data-i18n="demo_box_sub">Type below to watch triage scale react</span>
+          </div>
+          <textarea id="demo-input" class="demo-textarea" placeholder="e.g. Mild headache for two days, or type 'I can't breathe' to test emergency detection…">headache for two days</textarea>
+          <div class="quick-symptom-chips">
+            <button class="symptom-chip" data-demo="Headache for two days, relieved by rest" data-i18n="chip_1">Headache (Self-care)</button>
+            <button class="symptom-chip" data-demo="Persistent mild cough for two weeks without fever" data-i18n="chip_2">Mild cough (Routine)</button>
+            <button class="symptom-chip" data-demo="Deep cut on palm with active bleeding and throbbing" data-i18n="chip_3">Deep cut (Urgent)</button>
+            <button class="symptom-chip" data-demo="I cannot breathe and feel crushing chest pain" data-i18n="chip_4">Cannot breathe (Emergency)</button>
+          </div>
+
+          <div class="scale-card" role="region" aria-label="Triage Scale live reaction">
+            <div class="scale-header">
+              <span class="scale-title" data-i18n="urgency_scale_title">Assessment Urgency Level</span>
+              <span id="demo-badge" class="scale-current-badge" style="background:var(--u-self-bg); color:var(--u-self);">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span id="demo-badge-text">Self-care</span>
+              </span>
+            </div>
+            <div class="scale-ruler" aria-hidden="true">
+              <div class="scale-segment seg-self"></div><div class="scale-segment seg-routine"></div>
+              <div class="scale-segment seg-urgent"></div><div class="scale-segment seg-emergency"></div>
+              <div id="demo-pointer" class="scale-pointer" style="left: 12.5%;"></div>
+            </div>
+            <div class="scale-labels">
+              <span id="lbl-self_care" class="active" data-i18n="scale_self">Self-care</span>
+              <span id="lbl-routine" data-i18n="scale_routine">Routine</span>
+              <span id="lbl-urgent" data-i18n="scale_urgent">Urgent</span>
+              <span id="lbl-emergency" data-i18n="scale_emergency">Emergency</span>
+            </div>
+          </div>
+
+          <div id="demo-emergency-banner" class="emergency-banner hidden" role="alert">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--u-emergency)" stroke-width="2.2" style="flex-shrink:0">
+              <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <div>
+              <h4 data-i18n="emergency_title">Immediate Emergency Assistance Needed</h4>
+              <p data-i18n="emergency_body">Signs of severe distress, respiratory compromise, or cardiac symptoms require emergency care right away.</p>
+              <a href="tel:911" id="demo-call" class="emergency-call-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                <span data-i18n="emergency_call">Call 911 Now</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section id="ways-in" class="intake-section">
+        <h2 class="section-headline" data-i18n="ways_title">Four ways to describe symptoms</h2>
+        <p class="section-subtext" data-i18n="ways_desc">Choose the format easiest for you right now. You can combine text, voice, and photos at any stage.</p>
+
+        <div class="intake-asymmetric-list">
+          <a class="intake-item-card" href="text.html">
+            <div class="intake-item-top">
+              <div class="intake-icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div>
+              <div><h3 class="intake-item-title" data-i18n="mode_text_title">Type what you feel</h3><p class="intake-item-desc" data-i18n="mode_text_desc">Answer 3 guided questions about duration, severity, and triggers in plain language.</p></div>
+            </div>
+            <span class="btn btn-quiet" style="padding-left:0; font-weight:600; color:var(--primary);" data-i18n="start_text_btn">Start with text →</span>
+          </a>
+          <a class="intake-item-card" href="image.html">
+            <div class="intake-item-top">
+              <div class="intake-icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg></div>
+              <div><h3 class="intake-item-title" data-i18n="mode_photo_title">Add a photograph</h3><p class="intake-item-desc" data-i18n="mode_photo_desc">For rashes, swelling, cuts, or eye redness. Clear lighting and close frame.</p></div>
+            </div>
+            <span class="btn btn-quiet" style="padding-left:0; font-weight:600; color:var(--primary);" data-i18n="start_photo_btn">Upload photo →</span>
+          </a>
+          <a class="intake-item-card" href="voice.html">
+            <div class="intake-item-top">
+              <div class="intake-icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg></div>
+              <div><h3 class="intake-item-title" data-i18n="mode_voice_title">Record your voice</h3><p class="intake-item-desc" data-i18n="mode_voice_desc">Speak freely in English or Urdu. The audio is transcribed instantly to review.</p></div>
+            </div>
+            <span class="btn btn-quiet" style="padding-left:0; font-weight:600; color:var(--primary);" data-i18n="start_voice_btn">Record symptoms →</span>
+          </a>
+          <a class="intake-item-card" href="report.html">
+            <div class="intake-item-top">
+              <div class="intake-icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+              <div><h3 class="intake-item-title" data-i18n="mode_report_title">Upload lab report</h3><p class="intake-item-desc" data-i18n="mode_report_desc">PDF or photo of blood work or urinalysis. Explains high/low flags in plain terms.</p></div>
+            </div>
+            <span class="btn btn-quiet" style="padding-left:0; font-weight:600; color:var(--primary);" data-i18n="start_report_btn">Parse lab results →</span>
+          </a>
+        </div>
+        <p style="margin-top:1.25rem; font-size:.9375rem; color:var(--ink-soft);">Have more than one kind of information? <a href="multimodal.html" style="color:var(--primary); font-weight:600;">Combine text, photos, voice and a report in one assessment →</a></p>
+      </section>
+
+      <section class="trust-grid">
+        <div class="trust-col"><h3 data-i18n="trust_col1_title">Safety First Architecture</h3><p data-i18n="trust_col1_desc">Every assessment evaluates emergency red flags immediately on your device before reaching the cloud. If you are in danger, you are guided to call for help instantly.</p></div>
+        <div class="trust-col"><h3 data-i18n="trust_col2_title">Educational, Non-Diagnostic</h3><p data-i18n="trust_col2_desc">MediMind provides clinical perspective, not a medical diagnosis or treatment order. It equips you with questions to bring to your primary care clinician.</p></div>
+        <div class="trust-col"><h3 data-i18n="trust_col3_title">Privacy in Plain Words</h3><p data-i18n="trust_col3_desc">No advertising cookies, no data brokerage. Your uploads are processed solely for this session. You can purge your complete history at any moment with one click.</p></div>
+      </section>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+  <script type="module" src="js/pages/index.js"></script>
+</body>
+</html>

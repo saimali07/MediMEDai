@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice Assessment — MediMind AI</title>
+  <meta name="description" content="MediMind AI — educational, non-diagnostic health assessment from text, photos, voice and lab reports.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme-init.js"></script>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main id="app-main">
+    <section id="form-section">
+      <div class="form-container">
+        <div class="step-indicator"><span>Voice Assessment</span><span class="field-badge-req">English / اردو</span></div>
+        <div id="live-banner"></div>
+        <div class="panel recorder-box" style="margin-top:1rem;">
+          <h3 style="font-family:var(--font-display); font-size:1.75rem; margin-bottom:0.5rem;">Speak naturally about how you feel</h3>
+          <p style="color:var(--ink-soft); font-size:0.9375rem; margin-bottom:1.5rem; max-width:48ch; margin-inline:auto;">Describe where it hurts, when it started, and what makes it feel better or worse.</p>
+
+          <select id="speech-lang" class="input-select lang-select" aria-label="Speaking language">
+            <option value="en-US">English</option><option value="ur-PK">اردو (Urdu)</option><option value="hi-IN">हिन्दी (Hindi)</option>
+          </select>
+
+          <button id="record-btn" class="record-btn-round" aria-label="Toggle voice recording">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+          </button>
+          <div id="recording-timer" style="margin-top:0.75rem; font-weight:600; font-size:1rem; color:var(--ink);">00:00</div>
+          <div class="waveform-visualizer" id="waveform" aria-hidden="true">
+            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+          </div>
+          <p class="field-hint" id="voice-status">Tap the microphone to start (up to 3 minutes).</p>
+          <div class="btn-row"><button class="btn btn-secondary" id="upload-audio-btn" type="button">Upload an audio file instead</button>
+            <button class="btn btn-secondary hidden" id="transcribe-btn" type="button">Transcribe with AI</button></div>
+          <input type="file" id="audio-input" accept="audio/*" class="hidden">
+          <audio id="playback" controls class="hidden" style="width:100%; margin-top:1rem;"></audio>
+
+          <div style="text-align:left; margin-top:1.5rem;">
+            <label class="field-label" for="voice-transcript">Live Transcript (editable)</label>
+            <textarea id="voice-transcript" class="input-text" maxlength="6000" style="min-height:110px;" placeholder="Transcript will appear here as you speak…"></textarea>
+          </div>
+          <div class="consent-row" id="consent-row" style="text-align:left;"><input type="checkbox" id="consent"><label for="consent">I consent to my voice or transcript being processed by an AI service to produce this educational assessment. Live transcription uses your browser's speech service. See the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</label></div>
+          <p class="form-error" id="form-error" role="alert"></p>
+          <div class="page-actions">
+            <a class="btn btn-quiet" href="index.html">Cancel</a>
+            <button class="btn btn-primary" id="analyze-btn">Analyze Voice Transcript</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="analyzing" class="hidden"></section>
+  </main>
+
+  <div id="site-footer"></div>
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+  <script type="module" src="js/pages/voice.js"></script>
+</body>
+</html>

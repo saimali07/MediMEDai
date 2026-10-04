@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab Report Analyzer — MediMind AI</title>
+  <meta name="description" content="MediMind AI — educational, non-diagnostic health assessment from text, photos, voice and lab reports.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme-init.js"></script>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main id="app-main">
+    <section id="form-section">
+      <div class="form-container">
+        <div class="step-indicator"><span>Lab Report Analysis</span><span class="field-badge-req">PDF / photo of a report</span></div>
+        <div id="live-banner"></div>
+        <div class="panel" style="margin-top:1rem;">
+          <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Choose a lab report">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.8" style="margin-bottom:0.75rem;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+            <h4 style="font-size:1.125rem; font-weight:600; margin-bottom:0.25rem;">Drop your complete blood count (CBC) or metabolic panel</h4>
+            <p style="font-size:0.875rem; color:var(--ink-soft);">PDF, JPG, PNG or WebP up to 10 MB — from any lab or hospital portal</p>
+          </div>
+          <input type="file" id="file-input" accept="application/pdf,image/jpeg,image/png,image/webp" class="hidden">
+          <div id="file-preview"></div>
+          <div class="field-group" style="margin-top:1.5rem;">
+            <label class="field-label" for="notes"><span>Anything we should know?</span><span class="field-badge-req">Optional</span></label>
+            <textarea id="notes" class="input-text" maxlength="1500" style="min-height:70px; resize:vertical;" placeholder="e.g. Test done because of tiredness; I'm 34"></textarea>
+          </div>
+          <div class="consent-row" id="consent-row"><input type="checkbox" id="consent"><label for="consent">I consent to my report being processed by an AI service to produce this educational explanation. See the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</label></div>
+          <p class="form-error" id="form-error" role="alert"></p>
+          <div class="page-actions"><a class="btn btn-quiet" href="index.html">← Back</a><button class="btn btn-primary" id="analyze-btn" disabled>Generate Plain-Language Summary</button></div>
+        </div>
+        <p class="field-hint" style="text-align:center;">Every test, value, reference range and flag shown on the result comes from reading your actual file. Nothing here is a diagnosis.</p>
+      </div>
+    </section>
+    <section id="analyzing" class="hidden"></section>
+  </main>
+
+  <div id="site-footer"></div>
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+  <script type="module" src="js/pages/report.js"></script>
+</body>
+</html>

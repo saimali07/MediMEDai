@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Symptom Intake — MediMind AI</title>
+  <meta name="description" content="MediMind AI — educational, non-diagnostic health assessment from text, photos, voice and lab reports.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme-init.js"></script>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main id="app-main">
+    <section id="form-section">
+      <div class="form-container">
+        <div class="step-indicator">
+          <span id="step-count-label">Step 1 of 3: Describe your symptoms</span>
+          <span class="field-badge-req" data-i18n="step_required">Required fields noted</span>
+        </div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" id="form-progress-fill" style="width: 33%;"></div></div>
+
+        <div id="guest-note"></div>
+        <div id="live-banner"></div>
+
+        <div class="panel" style="margin-top:1rem;">
+          <div class="step-pane" data-step="1">
+            <div class="field-group">
+              <label class="field-label" for="primary-symptom"><span data-i18n="form_main_symptom">What is the primary symptom bothering you?</span><span class="field-badge-req" data-i18n="field_required">Required</span></label>
+              <input type="text" id="primary-symptom" class="input-text" maxlength="500" placeholder="e.g. Throbbing right-side headache with sensitivity to light">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="duration-select"><span data-i18n="form_duration">How long has this been happening?</span><span class="field-badge-req" data-i18n="field_required">Required</span></label>
+              <select id="duration-select" class="input-select">
+                <option value="Less than 6 hours">Less than 6 hours</option>
+                <option value="1 to 2 days" selected>1 to 2 days</option>
+                <option value="3 to 7 days">3 to 7 days</option>
+                <option value="More than a week">More than a week</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="severity-range"><span data-i18n="form_severity">Discomfort level (1 mild – 10 severe)</span><span id="severity-val" style="font-weight:700; color:var(--primary);">5 / 10</span></label>
+              <input type="range" id="severity-range" min="1" max="10" value="5" style="width:100%; accent-color:var(--primary);">
+            </div>
+          </div>
+
+          <div class="step-pane hidden" data-step="2">
+            <div class="field-group">
+              <label class="field-label" for="associated-symptoms"><span data-i18n="form_associated">Any other symptoms? (nausea, fever, stiff neck)</span><span class="field-badge-req" data-i18n="field_optional">Optional</span></label>
+              <textarea id="associated-symptoms" class="input-text" maxlength="1500" style="min-height:90px; resize:vertical;" placeholder="e.g. Mild nausea when looking at screens"></textarea>
+              <p class="field-hint">Mention anything that makes it better or worse, what you were doing when it started, and anything that worries you.</p>
+            </div>
+          </div>
+
+          <div class="step-pane hidden" data-step="3">
+            <p style="color:var(--ink-soft); font-size:.9375rem; margin-bottom:1.25rem;">All optional — more context helps the assessment be more useful.</p>
+            <div class="row-2">
+              <div class="field-group"><label class="field-label" for="age">Age</label><input type="number" id="age" class="input-text" min="0" max="120" placeholder="e.g. 34"></div>
+              <div class="field-group"><label class="field-label" for="sex">Sex</label>
+                <select id="sex" class="input-select"><option value="">Prefer not to say</option><option value="female">Female</option><option value="male">Male</option><option value="other">Other</option></select></div>
+            </div>
+            <div class="field-group"><label class="field-label" for="conditions">Existing conditions</label><input type="text" id="conditions" class="input-text" maxlength="600" placeholder="e.g. asthma, high blood pressure"></div>
+            <div class="field-group"><label class="field-label" for="medications">Current medications</label><input type="text" id="medications" class="input-text" maxlength="600" placeholder="Names only — no need for doses"></div>
+            <div class="field-group"><label class="field-label" for="allergies">Allergies</label><input type="text" id="allergies" class="input-text" maxlength="400" placeholder="e.g. penicillin, peanuts"></div>
+          </div>
+
+          <p class="form-error" id="form-error" role="alert"></p>
+          <div class="page-actions">
+            <button class="btn btn-quiet" id="back-btn" data-i18n="btn_back">← Back</button>
+            <button class="btn btn-primary" id="next-btn"><span id="next-label" data-i18n="btn_next">Next →</span></button>
+          </div>
+        </div>
+        <p style="font-size:.875rem; color:var(--ink-soft); text-align:center;">Have a photo, voice note or lab report too? <a href="multimodal.html" style="color:var(--primary); font-weight:600;">Combine them in one assessment</a>.</p>
+      </div>
+    </section>
+    <section id="analyzing" class="hidden"></section>
+  </main>
+
+  <div id="site-footer"></div>
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+  <script type="module" src="js/pages/text.js"></script>
+</body>
+</html>

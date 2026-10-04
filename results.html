@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Assessment — MediMind AI</title>
+  <meta name="description" content="MediMind AI — educational, non-diagnostic health assessment from text, photos, voice and lab reports.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme-init.js"></script>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main id="app-main">
+    <div id="state-msg" style="color:var(--ink-soft);">Loading your assessment…</div>
+    <div id="results-root" class="hidden">
+      <div id="emergency-slot"></div>
+      <div id="results-banner" class="results-hero-banner urgency-routine" role="region" aria-label="Assessment Outcome Banner"></div>
+      <div class="scale-card" style="margin-bottom: 2rem;" id="scale-card"></div>
+
+      <div class="results-layout">
+        <div class="results-main-col" id="main-col"></div>
+
+        <aside class="side-panel no-print" aria-label="Follow-up Inquiry Panel" id="chat-panel">
+          <h4 style="font-family:var(--font-display); font-size:1.1875rem; margin-bottom:0.5rem;">Ask a Follow-Up</h4>
+          <p style="font-size:0.8125rem; color:var(--ink-soft); margin-bottom:1rem;">Questions are contextualized by this assessment.</p>
+          <div id="guest-chat" class="hidden info-note">Follow-up questions are available with a free account. <a href="register.html">Create one</a> to continue.</div>
+          <div id="chat-body">
+            <div class="chat-log" id="chat-log" aria-live="polite">
+              <div class="chat-bubble assistant">Hello. You can ask for clarification on the recommended next steps or what to ask your doctor.</div>
+            </div>
+            <form id="chat-form" style="display:flex; gap:0.5rem;">
+              <input type="text" id="follow-up-input" class="input-text" maxlength="1500" placeholder="Type a follow-up question…" style="min-height:42px; font-size:0.875rem;" aria-label="Follow-up question">
+              <button class="btn btn-primary" id="chat-send" style="min-height:42px; padding:0 1rem;" aria-label="Send">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </button>
+            </form>
+          </div>
+          <span style="font-size:0.6875rem; color:var(--ink-muted); display:block; margin-top:0.5rem; text-align:center;">Educational responses only. Not prescriptive. No medicine names or doses.</span>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+  <script type="module" src="js/pages/results.js"></script>
+</body>
+</html>

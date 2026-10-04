@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Combined Assessment — MediMind AI</title>
+  <meta name="description" content="MediMind AI — educational, non-diagnostic health assessment from text, photos, voice and lab reports.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme-init.js"></script>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main id="app-main">
+    <section id="form-section">
+      <div class="form-container">
+        <div class="step-indicator"><span>Combined Assessment</span><span class="field-badge-req">Add any mix — at least one</span></div>
+        <div id="live-banner"></div>
+
+        <div class="panel" style="margin-top:1rem;">
+          <h3 style="font-family:var(--font-display); font-size:1.25rem; margin-bottom:1rem;">1. Describe it</h3>
+          <div class="field-group"><label class="field-label" for="symptoms">Main symptom</label><textarea id="symptoms" class="input-text" maxlength="2000" style="min-height:80px; resize:vertical;" placeholder="e.g. Itchy red patch on my forearm that is spreading"></textarea></div>
+          <div class="row-2">
+            <div class="field-group"><label class="field-label" for="duration">How long?</label>
+              <select id="duration" class="input-select"><option value="">Not sure</option><option>Less than 6 hours</option><option>1 to 2 days</option><option>3 to 7 days</option><option>More than a week</option></select></div>
+            <div class="field-group"><label class="field-label" for="age">Age <span class="field-badge-req">Optional</span></label><input type="number" id="age" class="input-text" min="0" max="120"></div>
+          </div>
+          <div class="field-group"><label class="field-label" for="sex">Sex <span class="field-badge-req">Optional</span></label>
+            <select id="sex" class="input-select"><option value="">Prefer not to say</option><option value="female">Female</option><option value="male">Male</option><option value="other">Other</option></select></div>
+        </div>
+
+        <div class="panel">
+          <h3 style="font-family:var(--font-display); font-size:1.25rem; margin-bottom:1rem;">2. Photos <span class="field-badge-req">Optional · up to 3</span></h3>
+          <div class="dropzone" id="photo-dz" tabindex="0" role="button" aria-label="Choose photos" style="padding:1.5rem;"><h4 style="font-size:1rem; font-weight:600;">Drop photos here, or browse</h4><p style="font-size:0.8125rem; color:var(--ink-soft);">JPG, PNG or WebP, up to 8 MB each</p></div>
+          <input type="file" id="photo-input" accept="image/jpeg,image/png,image/webp" multiple class="hidden">
+          <input type="file" id="camera-input" accept="image/*" capture="environment" class="hidden">
+          <div class="btn-row"><button type="button" class="btn btn-secondary" id="camera-btn">Take a photo</button></div>
+          <div id="photo-previews"></div>
+        </div>
+
+        <div class="panel recorder-box" style="padding:1.5rem 2rem;">
+          <h3 style="font-family:var(--font-display); font-size:1.25rem; margin-bottom:1rem; text-align:left;">3. Voice note <span class="field-badge-req">Optional</span></h3>
+          <select id="speech-lang" class="input-select lang-select" aria-label="Speaking language"><option value="en-US">English</option><option value="ur-PK">اردو (Urdu)</option><option value="hi-IN">हिन्दी (Hindi)</option></select>
+          <button id="record-btn" class="record-btn-round" aria-label="Toggle voice recording"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg></button>
+          <div id="recording-timer" style="margin-top:0.75rem; font-weight:600;">00:00</div>
+          <div class="waveform-visualizer" aria-hidden="true"><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div></div>
+          <p class="field-hint" id="voice-status">Tap the microphone to record (up to 3 minutes).</p>
+          <div style="text-align:left; margin-top:1rem;"><label class="field-label" for="voice-transcript">Transcript (editable)</label>
+            <textarea id="voice-transcript" class="input-text" maxlength="6000" style="min-height:80px;" placeholder="Your words will appear here…"></textarea></div>
+        </div>
+
+        <div class="panel">
+          <h3 style="font-family:var(--font-display); font-size:1.25rem; margin-bottom:1rem;">4. Lab report <span class="field-badge-req">Optional</span></h3>
+          <div class="dropzone" id="report-dz" tabindex="0" role="button" aria-label="Choose lab report" style="padding:1.5rem;"><h4 style="font-size:1rem; font-weight:600;">Add a lab report (PDF or photo)</h4><p style="font-size:0.8125rem; color:var(--ink-soft);">PDF, JPG, PNG or WebP up to 10 MB</p></div>
+          <input type="file" id="report-input" accept="application/pdf,image/jpeg,image/png,image/webp" class="hidden">
+          <div id="report-preview"></div>
+          <div class="consent-row" id="consent-row"><input type="checkbox" id="consent"><label for="consent">I consent to my photos, voice and reports being processed by an AI service to produce this educational assessment. See the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</label></div>
+          <p class="form-error" id="form-error" role="alert"></p>
+          <div class="page-actions"><a class="btn btn-quiet" href="index.html">← Back</a><button class="btn btn-primary" id="analyze-btn">Analyze Everything Together</button></div>
+        </div>
+      </div>
+    </section>
+    <section id="analyzing" class="hidden"></section>
+  </main>
+
+  <div id="site-footer"></div>
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+  <script type="module" src="js/pages/multimodal.js"></script>
+</body>
+</html>

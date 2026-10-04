@@ -1,0 +1,37 @@
+# Minimal Supabase CLI config. `supabase link --project-ref <ref>` connects it to your hosted project.
+project_id = "medimind"
+
+[api]
+enabled = true
+
+[db]
+major_version = 17
+
+[auth]
+enabled = true
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["http://localhost:3000/login.html", "http://127.0.0.1:5500/login.html"]
+enable_signup = true
+
+[auth.email]
+enable_signup = true
+enable_confirmations = false   # set true in production (also in Dashboard → Auth → Providers → Email)
+
+[storage]
+enabled = true
+
+# Functions verify the JWT themselves (so the single guest-trial path can accept the anon key).
+[functions.assess-text]
+verify_jwt = false
+[functions.assess-image]
+verify_jwt = false
+[functions.assess-voice]
+verify_jwt = false
+[functions.assess-multimodal]
+verify_jwt = false
+[functions.analyze-report]
+verify_jwt = false
+[functions.chat-followup]
+verify_jwt = false
+[functions.delete-my-data]
+verify_jwt = false

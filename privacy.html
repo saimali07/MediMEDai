@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — MediMind AI</title>
+  <meta name="description" content="MediMind AI — educational, non-diagnostic health assessment from text, photos, voice and lab reports.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme-init.js"></script>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main id="app-main">
+    <div class="form-container prose">
+      <h1 class="section-headline">Privacy Policy</h1>
+      <p>MediMind AI is an educational health-information tool. This page explains in plain words what happens to your data. <em>Template notice: have a qualified professional review this text before you launch publicly.</em></p>
+      <h2>What we collect</h2>
+      <ul>
+        <li><strong>Account:</strong> email address, optional name, and a password handled by Supabase Auth (we never see your password).</li>
+        <li><strong>Assessment inputs:</strong> the symptoms, details, photos, voice recordings, transcripts and lab reports you choose to submit, and the results generated from them.</li>
+        <li><strong>Technical:</strong> a one-way hash of your IP address for rate limiting (never the address itself). We do not log medical content.</li>
+      </ul>
+      <h2>How it is processed</h2>
+      <p>Your inputs are sent from our secure server functions to Groq's API (open models for text and image understanding, and Whisper for speech-to-text) to produce the assessment. Before that, a built-in safety check looks for emergency wording on your device and again on the server. Live voice transcription in some browsers uses your browser vendor's speech service; you can type instead or use AI transcription (Whisper) of a recording. PDF text is extracted in your browser before upload. We do not sell data and use no advertising cookies.</p>
+      <h2>Where it is stored</h2>
+      <p>Assessments are stored in a Supabase database with Row Level Security, so only your account can read your rows. Photos, audio and reports are kept in private storage buckets inside a folder only you can access and are shown through short-lived signed links. All traffic uses HTTPS. Guest trial results are not saved.</p>
+      <h2>Your choices</h2>
+      <ul>
+        <li>Delete a single assessment (and its files) from <a href="dashboard.html">History</a>.</li>
+        <li>Use <strong>Delete all my data</strong> on the same page to remove every assessment, chat, photo, audio file and report.</li>
+        <li>You are asked for consent before your first upload and can decline by not uploading.</li>
+      </ul>
+      <h2>Not for emergencies</h2>
+      <p>If you may be having an emergency, call your local emergency number. This service cannot do that for you.</p>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+  <script type="module" src="js/pages/static.js"></script>
+</body>
+</html>
