@@ -142,3 +142,4 @@ npx supabase functions deploy
 ```
 
 Privacy note: Google's free tier may use submitted content to improve its products. For real patient photos, use a paid (billing-enabled) Gemini key.
+Live demo: https://mediminai-two.vercel.app
